@@ -1,0 +1,27 @@
+.input {
+  padding: 10px 16px;
+  width: 568px;
+  border-radius: 8px 0px 0px 8px;
+  border: 1px solid black;
+}
+
+.searchicon {
+  padding: 7px 16px 8.5px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  border-radius: 0px 8px 8px 0px;
+  border: 1px solid black;
+  border-left: 0px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
