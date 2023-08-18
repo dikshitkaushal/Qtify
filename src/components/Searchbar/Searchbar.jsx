@@ -5,7 +5,6 @@ import "./Searchbar.css";
 const Searchbar = () => {
   let handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
   };
   return (
     <form

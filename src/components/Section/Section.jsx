@@ -5,16 +5,14 @@ import { Box, CircularProgress } from "@mui/material";
 import Carousel from "../Carousel/Carousel";
 import Songtabs from "../Tabs/Tabs";
 import { Divider } from "@mui/material";
-import Faq from "../Faq/Faq";
 
-const Section = ({ data, type, title }) => {
+const Section = ({ data, type, title, altdata = [] }) => {
   let [show, setShow] = useState(false);
   let [songType, setSongType] = useState("All");
   let [carouselData, setCarouselData] = useState([]);
   function handleToggle() {
     setShow(!show);
   }
-
   useEffect(() => {
     setCarouselData(data);
   }, [data]);
@@ -66,7 +64,14 @@ const Section = ({ data, type, title }) => {
           <div className={styles.noshowdata}>
             <Carousel
               data={carouselData}
-              component={(item) => <Card data={item} type={type} />}
+              component={(item) => (
+                <Card
+                  data={item}
+                  type={type}
+                  albumdata={data}
+                  altalbumdata={altdata}
+                />
+              )}
             />
           </div>
         )}

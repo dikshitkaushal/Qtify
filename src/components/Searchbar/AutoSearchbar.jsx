@@ -11,11 +11,11 @@ export default function AutoSearchbar({ topAlbums, newAlbums }) {
   let results = [...topAlbums, ...newAlbums];
   let handleSubmit = (e) => {
     e.preventDefault();
-    navigate("./albums", { state: { value: inputVal } });
+    navigate("./albums", { state: { value: inputVal, data: results } });
   };
 
   let handleChange = (e) => {
-    navigate("./albums", { state: { value: e.label } });
+    navigate("./albums", { state: { value: e.label, data: results } });
   };
 
   let options = results.map((item) => {
@@ -73,9 +73,6 @@ export default function AutoSearchbar({ topAlbums, newAlbums }) {
           label: item.label,
           value: item.value,
         }))}
-        onChange={(newValue) => {
-          console.log(newValue);
-        }}
         renderInput={(params) => (
           <TextField
             className="input"

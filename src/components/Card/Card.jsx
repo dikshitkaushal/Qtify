@@ -1,17 +1,21 @@
 import { Tooltip, Chip } from "@mui/material";
 import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import songContext from "../Context/Songcontext";
 
-export default function Card({ data, type }) {
+export default function Card({ data, type, albumdata, altalbumdata }) {
   let navigate = useNavigate();
+  let results = [...albumdata, ...altalbumdata];
+  let changeSong = useContext(songContext);
   switch (type) {
     case "album": {
-      const { image, follows, title, slug, songs } = data;
+      const { image, follows, title, songs } = data;
       return (
         <Tooltip title={`${songs.length} songs`} placement="top" arrow>
           <div
             onClick={() => {
-              navigate("./albums", { state: { value: title } });
+              navigate("./albums", { state: { value: title, data: results } });
             }}
             className={styles.wrapper}
           >
@@ -40,7 +44,16 @@ export default function Card({ data, type }) {
     case "song": {
       const { image, likes, title } = data;
       return (
-        <div className={styles.wrapper}>
+        <div
+          onClick={() => {
+            window.scrollTo({
+              top: document.documentElement.scrollHeight,
+              behavior: "smooth",
+            });
+            changeSong(data);
+          }}
+          className={styles.wrapper}
+        >
           <div className={styles.card}>
             <img
               className={styles.cardimage}

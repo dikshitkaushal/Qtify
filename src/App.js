@@ -7,24 +7,46 @@ import styles from "./App.module.css";
 import { Route, Routes } from "react-router-dom";
 import Albumssongs from "./components/Albumssongs/Albumssongs";
 import Faq from "./components/Faq/Faq";
+import Footer from "./components/Footer/Footer";
+import SongContext from "./components/Context/Songcontext";
 
 function App() {
   const [topAlbums, setTopAlbums] = useState([]);
   const [newAlbums, setNewAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
+  const [selectedsong, setSelectedSong] = useState({
+    image: "https://rb.gy/r3w5y",
+    title: "O Bedardeya",
+    genre: {
+      label: "Bollywood Hits",
+    },
+    durationInMs: 93501,
+  });
 
   const fetchTopAlbums = async () => {
-    let data = await getTopAlbums();
-    setTopAlbums(data);
+    try {
+      let data = await getTopAlbums();
+      setTopAlbums(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
   const fetchNewAlbums = async () => {
-    let data = await getNewAlbums();
-    setNewAlbums(data);
+    try {
+      let data = await getNewAlbums();
+      setNewAlbums(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const fetchSongs = async () => {
-    let data = await getSongs();
-    setSongs(data);
+    try {
+      let data = await getSongs();
+      setSongs(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
@@ -34,29 +56,39 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Navbar topAlbums={topAlbums} newAlbums={newAlbums} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <div className={styles.sectionWrapper}>
-                <Section data={topAlbums} type="album" title="Top Albums" />
-                <Section data={newAlbums} type="album" title="New Albums" />
-                <Section data={songs} type="song" title="Songs" />
-                <Faq />
-              </div>
-            </>
-          }
-        />
-        <Route
-          path="/albums"
-          element={<Albumssongs topAlbums={topAlbums} newAlbums={newAlbums} />}
-        />
-      </Routes>
-    </div>
+    <SongContext.Provider value={setSelectedSong}>
+      <div className="App">
+        <Navbar topAlbums={topAlbums} newAlbums={newAlbums} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <div className={styles.sectionWrapper}>
+                  <Section
+                    data={topAlbums}
+                    altdata={newAlbums}
+                    type="album"
+                    title="Top Albums"
+                  />
+                  <Section
+                    data={newAlbums}
+                    altdata={topAlbums}
+                    type="album"
+                    title="New Albums"
+                  />
+                  <Section data={songs} type="song" title="Songs" />
+                  <Faq />
+                </div>
+              </>
+            }
+          />
+          <Route path="/albums" element={<Albumssongs />} />
+        </Routes>
+        <Footer song={selectedsong} />
+      </div>
+    </SongContext.Provider>
   );
 }
 

@@ -15,6 +15,44 @@ const Carousel = ({ data, component }) => {
         slidesPerView={7}
         spaceBetween={40}
         allowTouchMove
+        breakpoints={{
+          375: {
+            // width: 576,
+            slidesPerView: 1,
+          },
+          535: {
+            // width: 768,
+            slidesPerView: 2,
+          },
+          768: {
+            // width: 768,
+            slidesPerView: 3,
+          },
+          900: {
+            // width: 768,
+            slidesPerView: 4,
+          },
+          1100: {
+            // width: 768,
+            slidesPerView: 5,
+          },
+          1250: {
+            // width: 768,
+            slidesPerView: 6,
+          },
+          1400: {
+            // width: 768,
+            slidesPerView: 7,
+          },
+          1600: {
+            // width: 768,
+            slidesPerView: 8,
+          },
+          2000: {
+            // width: 768,
+            slidesPerView: 10,
+          },
+        }}
       >
         <Leftarrow />
         <Rightarrow />

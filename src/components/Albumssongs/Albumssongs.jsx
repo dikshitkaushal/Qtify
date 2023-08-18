@@ -3,21 +3,24 @@ import { useLocation } from "react-router-dom";
 import Header from "./Headeralbum/Headeralbum";
 import SongsTable from "./SongsTable/SongsTable";
 
-const Albumssongs = ({ topAlbums, newAlbums }) => {
-  let albums = [...topAlbums, ...newAlbums];
+const Albumssongs = () => {
   let location = useLocation();
+  let albums = location.state.data;
   let albumName = location.state.value;
-  console.log("albums", albums);
-  let album = albums.filter((item) => item.title === albumName);
+  let album = albums.find((item) => item.title === albumName);
   let songs = [];
-  if (album.length) {
-    songs = album[0].songs;
-    console.log(songs);
+  if (album) {
+    songs = album.songs;
   }
-  return (
+
+  return songs.length ? (
     <div style={{ padding: "30px 50px" }}>
-      <Header data={album[0]} />
+      <Header data={album} />
       <SongsTable data={songs} />
+    </div>
+  ) : (
+    <div style={{ textAlign: "center", marginTop: "20%" }}>
+      Sorry! No results found
     </div>
   );
 };

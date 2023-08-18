@@ -7,25 +7,18 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
-// import { makeStyles } from "@material-ui/styles";
-
-// const useStyles = makeStyles(() => ({
-//   ul: {
-//     "& .MuiPaginationItem-root": {
-//       color: "#ffffff",
-//     },
-//   },
-// }));
+import "./SongsTable.css";
+import { useContext } from "react";
+import songContext from "../../Context/Songcontext";
 
 const SongsTable = ({ data }) => {
-  let [recordsPerPage, setRecordsPerPage] = useState(10);
   let [currentPage, setCurrentPage] = useState(1);
   let [tableData, setTableData] = useState([]);
   let [pages, setPages] = useState(0);
-  // const classes = useStyles();
+  let recordsPerPage = 10;
+  let songChange = useContext(songContext);
 
-  function handleChange(e) {
-    let pageNumber = Number(e.target.textContent);
+  function handleChange(e, pageNumber) {
     setCurrentPage(pageNumber);
   }
 
@@ -36,15 +29,13 @@ const SongsTable = ({ data }) => {
     let totalpage = Math.ceil(data.length / recordsPerPage);
     setTableData(slicedData);
     setPages(totalpage);
-  }, [currentPage]);
+  }, [currentPage, data, recordsPerPage]);
   return (
     <>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Pagination
-          // classes={{ ul: classes.ul }}
-          onChange={(e) => {
-            handleChange(e);
-          }}
+          sx={{ padding: "20px 0px" }}
+          onChange={handleChange}
           count={pages}
           color="secondary"
         />
@@ -68,7 +59,19 @@ const SongsTable = ({ data }) => {
             {tableData.map((item) => (
               <TableRow
                 key={item.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                onClick={() => {
+                  window.scrollTo({
+                    top: document.documentElement.scrollHeight,
+                    behavior: "smooth",
+                    /* you can also use 'auto' behaviour 
+                       in place of 'smooth' */
+                  });
+                  songChange(item);
+                }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  cursor: "pointer",
+                }}
               >
                 <TableCell component="th" scope="row">
                   <div
