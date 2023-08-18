@@ -3,17 +3,27 @@ import { ReactComponent as Searchicon } from "../../assets/Search-icon.svg";
 import "./Searchbar.css";
 
 const Searchbar = () => {
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
   return (
-    <div className="search">
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+      className="search"
+    >
       <input
         className="input"
         type="search"
         placeholder="Search a album of your choice"
+        required
       />
-      <button className="searchicon">
+      <button className="searchicon" type="submit">
         <Searchicon />
       </button>
-    </div>
+    </form>
   );
 };
 

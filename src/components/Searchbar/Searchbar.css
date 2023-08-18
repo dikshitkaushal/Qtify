@@ -1,6 +1,9 @@
 .input {
   padding: 10px 16px;
-  width: 568px;
+  /* width: 568px; */
+  width: 40vw !important;
+  background-color: var(--white-color);
+  /* color: whi; */
   border-radius: 8px 0px 0px 8px;
   border: 1px solid black;
 }
@@ -24,4 +27,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.css-1h51icj-MuiAutocomplete-root
+  .MuiOutlinedInput-root
+  .MuiAutocomplete-input {
+  height: 11px;
+  width: 20vw !important;
 }

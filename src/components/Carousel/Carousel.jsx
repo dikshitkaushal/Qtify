@@ -19,7 +19,6 @@ const Carousel = ({ data, component }) => {
         <Leftarrow />
         <Rightarrow />
         {data.map((item) => {
-          console.log(item);
           return <SwiperSlide key={item.id}>{component(item)}</SwiperSlide>;
         })}
       </Swiper>

@@ -1,14 +1,14 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
-import Searchbar from "../Searchbar/Searchbar";
+import AutoSearchbar from "../Searchbar/AutoSearchbar";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ topAlbums, newAlbums }) => {
   return (
     <nav className="navbar">
       <Logo />
-      <Searchbar />
+      <AutoSearchbar topAlbums={topAlbums} newAlbums={newAlbums} />
       <Button className="button" text={"Give Feedback"} />
     </nav>
   );

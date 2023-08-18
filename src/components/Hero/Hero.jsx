@@ -5,14 +5,14 @@ const Hero = () => {
   return (
     <div className={styles.hero}>
       <div>
-        <h1>100 Thousand Songs, ad-free</h1>
-        <h1>Over thousands podcast episodes</h1>
+        <h1 className={styles.heading}>100 Thousand Songs, ad-free</h1>
+        <h1 className={styles.heading}>Over thousands podcast episodes</h1>
       </div>
       <div>
         <img
+          className={styles.image}
           src={require("../../assets/Heroimage.png")}
           alt="heroimage"
-          width={212}
         />
       </div>
     </div>

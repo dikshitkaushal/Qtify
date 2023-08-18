@@ -22,4 +22,10 @@
 }
 .sectionwrapper {
   margin-bottom: 50px;
+  .line {
+    margin-bottom: 30px;
+  }
+}
+.line2 {
+  margin-top: 20px;
 }

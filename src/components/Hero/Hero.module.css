@@ -6,3 +6,11 @@
   gap: 30px;
   height: 270px;
 }
+
+.heading {
+  font-size: 2vw;
+}
+
+.image {
+  width: 15vw;
+}

@@ -1,5 +1,6 @@
 .wrapper {
   width: 160px;
+  cursor: pointer;
 }
 
 .card {
@@ -8,6 +9,15 @@
   height: 205px;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.cardimage {
+  transition: all 0.3s;
+}
+
+.cardimage:hover {
+  transform: scale(1.1);
+  filter: brightness(70%);
 }
 
 .titleWrapper {

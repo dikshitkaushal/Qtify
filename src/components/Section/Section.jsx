@@ -1,22 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Section.module.css";
 import Card from "../Card/Card";
 import { Box, CircularProgress } from "@mui/material";
 import Carousel from "../Carousel/Carousel";
+import Songtabs from "../Tabs/Tabs";
+import { Divider } from "@mui/material";
+import Faq from "../Faq/Faq";
 
 const Section = ({ data, type, title }) => {
   let [show, setShow] = useState(false);
+  let [songType, setSongType] = useState("All");
+  let [carouselData, setCarouselData] = useState([]);
   function handleToggle() {
     setShow(!show);
   }
+
+  useEffect(() => {
+    setCarouselData(data);
+  }, [data]);
+
+  function getCarouselData(songType) {
+    if (songType === "All") return data;
+    return data.filter((song) => song.genre.label === songType);
+  }
+
+  function handlesong(value) {
+    let data = getCarouselData(value);
+    setCarouselData(data);
+    setSongType(value);
+  }
   return (
     <div className={styles.sectionwrapper}>
+      {type === "song" && (
+        <div className={styles.line}>
+          <Divider sx={{ backgroundColor: "#34c94b" }} />
+        </div>
+      )}
       <div className={styles.heading}>
         <div className={styles.title}>{title}</div>
         <div className={styles.toggle} onClick={handleToggle}>
-          {!show ? "Show all" : "Collapse"}
+          {type === "song" ? null : !show ? "Show all" : "Collapse"}
         </div>
       </div>
+      {type === "song" ? (
+        <Songtabs value={songType} handleChange={handlesong} />
+      ) : null}
       <div className={styles.datawrapper}>
         {!data.length ? (
           <Box
@@ -37,12 +65,17 @@ const Section = ({ data, type, title }) => {
         ) : (
           <div className={styles.noshowdata}>
             <Carousel
-              data={data}
+              data={carouselData}
               component={(item) => <Card data={item} type={type} />}
             />
           </div>
         )}
       </div>
+      {type === "song" && (
+        <div className={styles.line2}>
+          <Divider sx={{ backgroundColor: "#34c94b" }} variant="fullWidth" />
+        </div>
+      )}
     </div>
   );
 };
