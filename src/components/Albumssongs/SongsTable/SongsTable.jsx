@@ -7,22 +7,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
-import { makeStyles } from "@material-ui/styles";
+// import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(() => ({
-  ul: {
-    "& .MuiPaginationItem-root": {
-      color: "#ffffff",
-    },
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   ul: {
+//     "& .MuiPaginationItem-root": {
+//       color: "#ffffff",
+//     },
+//   },
+// }));
 
 const SongsTable = ({ data }) => {
   let [recordsPerPage, setRecordsPerPage] = useState(10);
   let [currentPage, setCurrentPage] = useState(1);
   let [tableData, setTableData] = useState([]);
   let [pages, setPages] = useState(0);
-  const classes = useStyles();
+  // const classes = useStyles();
 
   function handleChange(e) {
     let pageNumber = Number(e.target.textContent);
@@ -41,7 +41,7 @@ const SongsTable = ({ data }) => {
     <>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Pagination
-          classes={{ ul: classes.ul }}
+          // classes={{ ul: classes.ul }}
           onChange={(e) => {
             handleChange(e);
           }}
