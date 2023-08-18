@@ -65,6 +65,7 @@ export default function AutoSearchbar({ topAlbums, newAlbums }) {
       className="search"
     >
       <Autocomplete
+        sx={{}}
         freeSolo
         id="free-solo-2-demo"
         disableClearable
